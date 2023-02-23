@@ -1,3 +1,8 @@
+-- 03. Tabellen verbunden + INSERTS
+
+-- Vorbereitungen
+DROP DATABASE IF EXISTS mydb;
+CREATE DATABASE IF NOT EXISTS mydb;
 
 -- MT: cats
 CREATE TABLE IF NOT EXISTS `mydb`.`cats` (
@@ -6,6 +11,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`cats` (
   `fur_color` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+-- MT: Struktur
+DESCRIBE mydb.cats;
+
+-- MT: Inserts
+INSERT INTO `mydb`.`cats` (`id`, `cat_name`, `fur_color`) VALUES (DEFAULT, "Grizabella", "white");
+INSERT INTO `mydb`.`cats` (`id`, `cat_name`, `fur_color`) VALUES (DEFAULT, "Mausi", "striped");
+
+-- MT: Inhalte
+SELECT * FROM mydb.cats;
 
 -- DT: kittens
 CREATE TABLE IF NOT EXISTS `mydb`.`kittens` (
@@ -21,4 +36,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`kittens` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+-- DT: Struktur
+DESCRIBE mydb.kittens;
+
+-- DT: Inserts
+INSERT INTO `mydb`.`kittens` (`id`, `kitten_name`, `fur_color`, `cats_id`) VALUES (DEFAULT, "Grizzi_1", "white", 1);
+INSERT INTO `mydb`.`kittens` (`id`, `kitten_name`, `fur_color`, `cats_id`) VALUES (DEFAULT, "Grizzi_2", "white", 1);
+INSERT INTO `mydb`.`kittens` (`id`, `kitten_name`, `fur_color`, `cats_id`) VALUES (DEFAULT, "Mausini", "striped", 2);
+
+-- DT: Inhalte
+SELECT * FROM mydb.kittens;
+
+
 
