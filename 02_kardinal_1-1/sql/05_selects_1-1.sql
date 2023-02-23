@@ -29,8 +29,8 @@ SELECT
 FROM mydb.cats INNER JOIN mydb.servants
 ON mydb.cats.id = mydb.servants.cats_id
 #WHERE cat_name = "Grizabella"
-#WHERE servant_name = "Daniel"
-WHERE Diener = "Daniel" 
+WHERE servant_name = "Daniel"
+#WHERE Diener = "Daniel" 
 ;
 
 -- Inner Join 2a / (Wer dient wem?)
@@ -65,7 +65,7 @@ LIMIT 1
 -- 2. Variante: Subquery
 
 -- Test Subquery
-#SELECT MAX(yrs_served) FROM mydb.servants
+SELECT MAX(yrs_served) FROM mydb.servants;
 
 -- Subquery in WHERE
 SELECT
@@ -75,7 +75,22 @@ ON mydb.cats.id = mydb.servants.cats_id
 WHERE yrs_served = (SELECT MAX(yrs_served) FROM mydb.servants)
 ;
 
+-- 3.Variante:  VIEW / QUERY / MAX() in VIEW gekapselt
+DROP VIEW IF EXISTS mydb.max_time;
 
-    
+CREATE VIEW mydb.max_time AS
+SELECT 
+	MAX(yrs_served) 
+FROM mydb.servants
+;
+
+SELECT * FROM mydb.max_time;
+
+SELECT
+    CONCAT(servant_name, " - der Diener von ", cat_name, " - ist der Diener mit der längsten Dienstzeit.") AS Dienstzeit
+FROM mydb.cats INNER JOIN mydb.servants
+ON mydb.cats.id = mydb.servants.cats_id
+WHERE yrs_served = (SELECT * FROM mydb.max_time)
+;
 
 
