@@ -28,16 +28,24 @@ SELECT
     servant_name AS Diener
 FROM mydb.cats INNER JOIN mydb.servants
 ON mydb.cats.id = mydb.servants.cats_id
-#WHERE cat_name = "Grizabella"
-WHERE servant_name = "Daniel"
+WHERE cat_name = "Grizabella"
+#WHERE servant_name = "Daniel"
 #WHERE Diener = "Daniel" ??
 ;
 
 -- Inner Join 2a / (Wer dient wem?)
 -- "X ist der Diener von Y"  / Dienstverhältnis
+SELECT
+	CONCAT(servant_name, " ist der Diener von ", cat_name, ".") AS Dienstverhältnis
+FROM mydb.cats INNER JOIN mydb.servants
+ON mydb.cats.id = mydb.servants.cats_id
+WHERE cat_name = "Mausi"
+;
 
+-- Inner Join 3 / Dienstzeit
 
-
+/* Inner Join 4 / Dienstzeit */
+-- "X - der Diener von Y - ist der Diener mit der längsten Dienstzeit" // MAX()
 
     
 
